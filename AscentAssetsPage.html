@@ -1,0 +1,58 @@
+<apex:page standardController="Account" sidebar="false" showheader="false"  applyBodyTag="false" extensions="getAscentItems,getAssetSummary">
+
+    <head>
+        <style> 
+            body { font-family: 'Arial Unicode MS'; }
+            .quoteStyle { font: bold 12px; color: black; border-collapse: collapse; -fs-table-paginate: paginate;} 
+            .quoteStyleHeader { font: 12px; color: black; background-color: #C2C2C2; border-collapse: collapse; -fs-table-paginate: paginate;} 
+            .quoteStyleTotal { font: bold 12px; color: black; background-color: #C2C2C2;border: 1px solid black; border-color: red; border-collapse: collapse; -fs-table-paginate: paginate;}
+            .quoteStyleGrandTotal { font: bold 12px; color: black; background-color: #C2C2C2;border: 1px solid black; border-collapse: collapse; -fs-table-paginate: paginate;}              
+            .fieldWidth { width: 10px; }
+                  
+                 @page {
+                              
+                           @bottom-center {
+<!--                                 content: element(footer);
+-->
+                           }
+                           margin:0.5em 2em 2em 2em; //top,right,bottom,left
+                       }                           
+                       div.footer {
+                               display: block;
+                               padding: 5px;
+                               position: running(footer);
+                               }
+                                   .pagenumber:before {
+                                        content: counter(page);
+                                    }
+                                   .pagecount:before {
+                                        content: counter(pages);
+                                    }
+                       table {
+                             -fs-table-paginate: paginate;
+                             width:100%;
+                       }                    
+        </style>
+    </head>
+ 
+<apex:pageblock >
+<apex:pageblockSection columns="1">
+
+
+  <apex:dataTable value="{!AscentAssetLines}" var="lines" id="thepage" rowClasses="odd,even"  
+                        border="1" cellpadding="3" cellspacing="3" styleClass="quoteStyle" width="100%"> 
+                      
+            <apex:column headerValue="            Ship Date            " style="align: center;">
+                 <apex:outputField value="{!lines.PBSI__Date_Shipped__c}" />
+            </apex:column>
+            <apex:column headerValue="            Name            " style="align: center;">
+                 <apex:outputField value="{!lines.PBSI__Item__r.name}" />
+            </apex:column>
+            <apex:column headerValue="            Serial Numbers            " style="align: center;">
+                 <apex:outputField value="{!lines.PBSI__Serial_Number__c}" />
+            </apex:column>            
+        </apex:dataTable> 
+</apex:pageblockSection>              
+ 
+</apex:pageblock>
+</apex:page>

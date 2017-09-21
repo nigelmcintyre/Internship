@@ -1,0 +1,97 @@
+<apex:page standardController="Account" extensions="getAscentItems">    
+<apex:outputPanel layout="block" style="overflow:auto;width:500;height:180px">
+    <apex:form  styleClass="formId">
+        <apex:pageblock id="table">
+
+            <script>
+            function openWindowPopup(sysid,pid,bid,mid,mdid,tid,eid,mrid,lid,ldid,nid,ncid,lvid,uid,cid){
+                    var systemId= document.getElementById(sysid).innerHTML;
+                    var passwordValue = document.getElementById(pid).value;
+                    var basetypeVal = document.getElementById(bid).value;
+                    var managedCNE = document.getElementById(mid).value;
+                    var marketData = document.getElementById(mdid).checked;
+                    var transactionProtocol = document.getElementById(tid).checked;
+                    var enterpriseDecoder = document.getElementById(eid).checked;
+                    var manageReports = document.getElementById(mrid).checked;
+                    var lens = document.getElementById(lid).checked;
+                    var liveDash = document.getElementById(ldid).checked;
+                    var networkInterface = document.getElementById(nid).value;
+                    var networkCapture = document.getElementById(ncid).checked;
+                    var licenseValidity = document.getElementById(lvid).value;
+                    var userEnd = document.getElementById(uid).value;
+                    var comments = document.getElementById(cid).value;
+
+                    
+                window.open('https://www.local.licenses_v83.cgi?sysid='+systemId+'&passwd='+passwordValue+'&basetype='+basetypeVal+'&managed-cnes='+managedCNE+'&messages-md='+marketData+'&messages-trans='+transactionProtocol+'&messages-enterprise='+enterpriseDecoder+'&mgmtrprts='+manageReports+'&tradelens='+lens+'&livedash='+liveDash+'&nic='+networkInterface+'&nca='+networkCapture+'&duration='+licenseValidity+'&userEndTime='+userEnd+'&comment='+comments);
+            }
+            </script>
+
+
+     <apex:pageblocktable id="pageBlockId" value="{!AscentAssetLines}" var="lines" >     
+                <apex:column >
+                    <apex:commandbutton value="Generate" reRender="table" onclick="openWindowPopup('{!$Component.mysysId}','{!$Component.mypid}','{!$Component.mybid}','{!$Component.mymid}','{!$Component.mymdid}','{!$Component.mytid}','{!$Component.myeid}','{!$Component.mymrid}','{!$Component.mylid}','{!$Component.myldid}','{!$Component.mynid}','{!$Component.myncid}','{!$Component.mylvid}','{!$Component.myuid}','{!$Component.mycid}')" />       
+                </apex:column>
+
+                <apex:column headerValue="Serial Numbers" >
+                    <apex:outputField value="{!lines.PBSI__Serial_Number__c}" id="mysysId"  />
+                </apex:column>
+
+                    <apex:column headerValue="Password">
+                        <apex:inputField value="{!AssetItems.Password__c}" id="mypid" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="License Type">
+                        <apex:inputField value="{!AssetItems.License_Type__c}" id="mybid"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="Managed CNEs">
+                        <apex:inputField value="{!AssetItems.Managed_CNE__c}"  id="mymid" />
+                    </apex:column>
+
+                    <apex:column headerValue="Market Data Decoder Pack">
+                        <apex:inputCheckBox value="{!AssetItems.Market_Data_Decoder_Pack__c}" id="mymdid" /> 
+                    </apex:column>
+
+                    <apex:column headerValue="Transaction Protocol Decoder Pack">
+                        <apex:inputField value="{!AssetItems.Transaction_Protocol_Decoder_Pack__c}" id="mytid" /> 
+                    </apex:column>
+
+                    <apex:column headerValue="Enterprise Decoder Pack">
+                        <apex:inputField value="{!AssetItems.Enterprise_Decoder_Pack__c}"  id="myeid"/> 
+                    </apex:column>   
+
+                    <apex:column headerValue="Management Reports">
+                        <apex:inputField value="{!AssetItems.Management_Reports__c}" id="mymrid"/> 
+                    </apex:column> 
+                    <apex:column headerValue="Lens">
+                        <apex:inputField value="{!AssetItems.Lens__c}" id="mylid"/>
+                    </apex:column>  
+
+                    <apex:column headerValue="License Validity">
+                        <apex:inputField value="{!AssetItems.License_Validity__c}" id="myldid"/>                              
+                    </apex:column>
+
+                    <apex:column headerValue="Network Interfaces">
+                        <apex:inputField value="{!AssetItems.Network_Interfaces__c}" id="mynid"/>
+                    </apex:column>   
+
+                    <apex:column headerValue="Network Capture and Analysis">
+                        <apex:inputField value="{!AssetItems.Network_Capture_and_Analysis__c}" id="myncid"/>
+                    </apex:column>
+
+                    <apex:column headerValue="License Validity">
+                        <apex:inputField value="{!AssetItems.License_Validity__c}" id="mylvid"/>                              
+                    </apex:column>
+                    
+                    <apex:column headerValue="user-specified end time">
+                        <apex:inputField value="{!AssetItems.user_specified_end_time__c}" id="myuid"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="Comments">
+                        <apex:inputField value="{!AssetItems.Comments__c}" id="mycid"/>
+                    </apex:column>
+                </apex:pageblocktable>
+            </apex:pageblock>
+        </apex:form>
+    </apex:outputPanel>
+</apex:page>

@@ -1,0 +1,12 @@
+<apex:page standardController="Account" extensions="assetSummary">   
+    <apex:pageblock title="Asset Summary">
+        
+		<apex:pageblocktable value="{!ListOut}" var="lo">
+			<apex:column value="{!lo['name']}" headervalue="Name" >
+            </apex:column>
+			<apex:column value="{!lo['quantity']}" headervalue="quantity">
+            </apex:column>
+		</apex:pageblocktable>
+	</apex:pageblock>
+            
+</apex:page>
